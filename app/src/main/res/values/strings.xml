@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Sklad čehokoli</string>
+    <string name="settings">nastavení</string>
+    <string name="nazev_aplikace">Everyscan.</string>
+    <string name="welcome_picture">Úvodní obrázek</string>
+    <string name="_return">Vrátit</string>
+    <string name="borrow">Vypůjčit</string>
+    <string name="scan_now">Skenovat</string>
 </resources>

@@ -6,4 +6,5 @@
     <string name="_return">Vrátit</string>
     <string name="borrow">Vypůjčit</string>
     <string name="scan_now">Skenovat</string>
+    <string name="no_items_to_show">Žádné položky k zobrazení.</string>
 </resources>

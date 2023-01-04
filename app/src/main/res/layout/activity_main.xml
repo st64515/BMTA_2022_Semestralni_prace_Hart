@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_darker1"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topPart"
@@ -75,7 +75,7 @@
             android:layout_weight="1">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButtonBorrow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -83,7 +83,7 @@
                 android:textColor="@color/light_gray_text" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtonReturn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/_return"
@@ -95,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="#FFFFFF"
+            android:background="@color/blue_darker2"
             android:backgroundTintMode="add"
             android:text="@string/scan_now"
             android:textColor="@color/light_gray_text"

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/defineItem"
+        android:title="Definovat novou položku"
+        android:titleCondensed="defineItem" />
+
+    <item
+        android:id="@+id/removeItem"
+        android:title="Smazat položku se skladu"
+        android:titleCondensed="removeItem" />
+
+    <item
+        android:id="@+id/showAllItems"
+        android:title="Zobrazit všechny položky"
+        android:titleCondensed="showAllItems" />
+
+    <item
+        android:id="@+id/showBorrowedItems"
+        android:title="Zobrazit vypůjčené položky"
+        android:titleCondensed="showBorrowedItems" />
+
+</menu>

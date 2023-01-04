@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.bmta_2022_semestralni_prace_hart"
-        minSdk 21
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -45,8 +45,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0"
 
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.12.1'
 }
 
 

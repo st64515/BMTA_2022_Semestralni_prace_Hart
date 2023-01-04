@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue_darker2">
+
+    <TextView
+        android:id="@+id/itemRowDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Description"
+        android:textColor="@color/light_gray_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemRowLastSeen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif"
+        android:text="lastSeen"
+        android:textColor="@color/light_gray_text"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemRowID" />
+
+    <TextView
+        android:id="@+id/textBorrowings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Počet vypůjčení:"
+        android:textColor="@color/light_gray_text"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemRowBorrowings"
+        app:layout_constraintStart_toStartOf="@+id/itemRowDescription" />
+
+    <TextView
+        android:id="@+id/itemRowID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#sample_item_code"
+        android:textColor="@color/light_gray_text"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textBorrowings"
+        app:layout_constraintEnd_toEndOf="@+id/itemRowLastSeen" />
+
+    <TextView
+        android:id="@+id/textCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="Kód:"
+        android:textColor="@color/light_gray_text"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemRowID"
+        app:layout_constraintEnd_toStartOf="@+id/itemRowID" />
+
+    <TextView
+        android:id="@+id/itemRowBorrowings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="0"
+        android:textColor="@color/light_gray_text"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/textBorrowings"
+        app:layout_constraintTop_toBottomOf="@+id/itemRowDescription" />
+
+    <TextView
+        android:id="@+id/textLastSeen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="Poslední záznam:"
+        android:textColor="@color/light_gray_text"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemRowLastSeen"
+        app:layout_constraintEnd_toStartOf="@+id/itemRowLastSeen" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue_darker1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemRowLastSeen" />
+</androidx.constraintlayout.widget.ConstraintLayout>

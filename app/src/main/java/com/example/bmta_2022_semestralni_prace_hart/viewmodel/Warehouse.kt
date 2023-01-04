@@ -23,9 +23,19 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
         allItems[wItem.id] = wItem
     }
 
+    private fun moveWarehouseItemToBorrowed(wItemID: String) {
+        val wItem = allItems[wItemID]
+        if (wItem is WarehouseItem && !borrowedItems.containsKey(wItemID)) {
+            borrowedItems[wItem.id] = wItem
+        } else {
+            throw WarehouseItemNotFoundException(wItemID)
+        }
+    }
+
     fun borrowWarehouseItem(wItemID: String) {
         val wItem = allItems[wItemID]
         if (wItem is WarehouseItem && !borrowedItems.containsKey(wItemID)) {
+            wItem.numberOfBorrowings++
             wItem.lastSeen = DateTimeFormatter
                 .ofPattern("dd. MM. yyyy HH:mm")
                 .withZone(ZoneOffset.ofHours(1))
@@ -48,7 +58,6 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     fun returnWarehouseItem(wItemID: String) {
         var wItem = borrowedItems[wItemID]
         if (wItem is WarehouseItem) {
-            wItem.numberOfBorrowings++
             wItem.lastSeen = DateTimeFormatter
                 .ofPattern("dd. MM. yyyy HH:mm")
                 .withZone(ZoneOffset.ofHours(1))
@@ -59,13 +68,14 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
         }
     }
 
-    fun removeWarehouseItem(wItemID: String) {
+    fun removeWarehouseItem(wItemID: String): WarehouseItem? {
         val wItem = allItems[wItemID]
         if (wItem is WarehouseItem) {
-            allItems.remove(wItemID)
+            var removed = allItems.remove(wItemID)
             if (borrowedItems.containsKey(wItemID)) {
                 borrowedItems.remove(wItemID)
             }
+            return removed
         } else {
             throw WarehouseItemNotFoundException(wItemID)
         }
@@ -129,7 +139,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
         borrowedCodes?.let {
             for (i in 0 until borrowedCodes.length()) {
                 try {
-                    borrowWarehouseItem(borrowedCodes[i].toString())
+                    moveWarehouseItemToBorrowed(borrowedCodes[i].toString())
                 } catch (ex: WarehouseItemNotFoundException) {
                     throw JSONException("Chyba při načítání vypůjčených položek")
                 }
@@ -139,8 +149,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
 
     fun borrowedCodesList(): ArrayList<String> {
         var codes = ArrayList<String>()
-        for (item in borrowedItems)
-        {
+        for (item in borrowedItems) {
             codes.add(item.key)
         }
         return codes

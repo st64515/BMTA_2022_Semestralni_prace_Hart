@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.bmta_2022_semestralni_prace_hart.R
-import com.example.bmta_2022_semestralni_prace_hart.databinding.ActivityBorrowedItemsBinding
 import com.example.bmta_2022_semestralni_prace_hart.databinding.ActivityNewItemBinding
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
@@ -17,6 +16,7 @@ class NewItemActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewItemBinding
     private val data = Intent()
+
     private val barcodeLauncher =
         registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
 
@@ -36,7 +36,7 @@ class NewItemActivity : AppCompatActivity() {
 
         getSupportActionBar()?.hide()
         this.window.statusBarColor =
-            this.resources.getColor(com.example.bmta_2022_semestralni_prace_hart.R.color.blue_darker2)
+            this.resources.getColor(R.color.blue_darker2, null)
 
         binding.buttonAdd.setOnClickListener() {
             if (binding.editTextItemCode.text.isEmpty()) {

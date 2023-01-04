@@ -30,25 +30,32 @@ class MainActivity : AppCompatActivity() {
     private lateinit var caller: String
     private val mapper = jacksonObjectMapper()
 
+    //Obsluha po dokončení aktivity skenování kódu
     private val barcodeLauncher =
         registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
-
             if (result.contents == null) {
                 Toast.makeText(this@MainActivity, "Načítání zrušeno", Toast.LENGTH_LONG).show()
             } else {
                 handleReadCode(result.contents)
-                writeToFile(makeJsonString(),applicationContext) //Uložení do souboru
+                writeToFile(makeJsonString(), applicationContext) //Uložení do souboru
             }
         }
+
+    //Obsluha po dokončení aktivity definovaní nového itemu
     private val defineItemIntentLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-
             if (result.resultCode == Activity.RESULT_OK) {
-                var newItem = result.data?.getSerializableExtra("newItem") as WarehouseItem
+                var newItem =
+                    result.data?.getSerializableExtra("newItem") as WarehouseItem //ponecháno deprecated z důvodu kompatibility s API 26
                 if (newItem != null) {
                     try {
                         warehouse.defineNewWarehouseItem(newItem)
-                        writeToFile(makeJsonString(),applicationContext) //Uložení do souboru
+                        writeToFile(makeJsonString(), applicationContext) //Uložení do souboru
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Přidána položka " + newItem.description,
+                            Toast.LENGTH_LONG
+                        ).show()
                     } catch (ex: java.lang.IllegalArgumentException) {
                         Toast.makeText(
                             this@MainActivity,
@@ -60,17 +67,73 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    //Obsluha po dokončení aktivity editace itemu
+    private val editItemIntentLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                var editedItem =
+                    result.data?.getSerializableExtra("editedItem") as WarehouseItem //ponecháno deprecated z důvodu kompatibility s API 26
+                if (editedItem != null) {
+                    try {
+                        warehouse.allItems[editedItem.id]?.description=editedItem.description
+                        warehouse.allItems[editedItem.id]?.numberOfBorrowings=editedItem.numberOfBorrowings
+                        writeToFile(makeJsonString(), applicationContext) //Uložení do souboru
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Editována položka " + editedItem.description,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } catch (ex: java.lang.IllegalArgumentException) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Chyba: Položka s tímto kódem již existuje!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+
+    //Obsluha po dokončení aktivity odebírání itemu
+    private val removeItemIntentLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                var codeToRemove =
+                    result.data?.getStringExtra("codeToRemove")
+                if (codeToRemove != null) {
+                    try {
+                       var removed = warehouse.removeWarehouseItem(codeToRemove)
+                        writeToFile(makeJsonString(), applicationContext) //Uložení do souboru
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Ze skladu smazána položka: " + removed?.description,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } catch (e: WarehouseItemNotFoundException) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Tato položka nebyla definována: " + e.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //binding prvků z layoutu
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getSupportActionBar()?.hide()
+        //přizpůsobení horní lišty aplikace modernímu vzhledu
+        supportActionBar?.hide()
         this.window.statusBarColor =
-            this.resources.getColor(com.example.bmta_2022_semestralni_prace_hart.R.color.blue_darker2)
+            this.resources.getColor(R.color.blue_darker2, null)
 
+        //načítání uložených dat, předání do factory (vytváření instance pro mvvm)
         val savedItemsJson = readFromFile(applicationContext)
-
         try {
             var factory = WarehouseFactory(savedItemsJson)
             warehouse = ViewModelProvider(this, factory).get(Warehouse::class.java)
@@ -83,19 +146,17 @@ class MainActivity : AppCompatActivity() {
             this.finishAffinity()
         }
 
-        binding.buttonScan.setOnClickListener() {buttonScanOnClick()  }
-        binding.settingsButton.setOnClickListener() { onMenuClicked() }
+        //nastavení OnClick tlačítek
+        binding.buttonScan.setOnClickListener() { buttonScanOnClick() }
+        binding.settingsButton.setOnClickListener() { settingsButtonOnClick() }
     }
 
     private fun buttonScanOnClick() {
-
         scanCode("button")
-
-        writeToFile(makeJsonString(),applicationContext)
     }
 
 
-    private fun onMenuClicked() {
+    private fun settingsButtonOnClick() {
         // Initializing the popup menu and giving the reference as current context
         val popupMenu = PopupMenu(this@MainActivity, binding.settingsButton)
 
@@ -112,7 +173,16 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
             } else if (menuItem.titleCondensed == "defineItem") {
                 defineItemIntentLauncher.launch(Intent(this, NewItemActivity::class.java))
+            } else if (menuItem.titleCondensed == "removeItem") {
+                val i = Intent(this, RemoveItemActivity::class.java)
+                i.putExtra("warehouse", warehouse)
+                removeItemIntentLauncher.launch(i)
+            }else if (menuItem.titleCondensed == "editItem") {
+                val i = Intent(this, EditItemActivity::class.java)
+                i.putExtra("warehouse", warehouse)
+                editItemIntentLauncher.launch(i)
             } else {
+                //TODO odebrat argument funkce scanCode()
                 scanCode(menuItem.titleCondensed.toString())
             }
             true
@@ -182,7 +252,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
-            "removeItem" -> {
+            /*"removeItem" -> {
                 try {
                     item = warehouse.findWarehouseItem(contents)
                 } catch (e: WarehouseItemNotFoundException) {
@@ -208,30 +278,11 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
-            }
+            }*/
         }
     }
 
-    //TODO: dodělat ukládání po každém stisknutí tlačítka
-/*
-    fun readJsonStringFromFile(): String {
-        var string: String? = ""
-        val stringBuilder = StringBuilder()
-        val inputStream: InputStream = this.resources.openRawResource(R.raw.saved_items)
-        val reader = BufferedReader(InputStreamReader(inputStream))
-        while (true) {
-            try {
-                if (reader.readLine().also { string = it } == null) break
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            stringBuilder.append(string).append("\n")
-        }
-        inputStream.close()
-        return stringBuilder.toString()
-    }*/
-
-    private fun makeJsonString():String{
+    private fun makeJsonString(): String {
         val stringBuilder = StringBuilder()
 
         stringBuilder.append("{")

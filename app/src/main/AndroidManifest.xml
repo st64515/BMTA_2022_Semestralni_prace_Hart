@@ -15,6 +15,20 @@
         android:theme="@style/Theme.BMTA_2022_Semestralni_prace_Hart"
         tools:targetApi="31">
         <activity
+            android:name=".view.EditItemActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.RemoveItemActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".view.NewItemActivity"
             android:exported="false">
             <meta-data

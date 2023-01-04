@@ -6,10 +6,6 @@
         android:title="Definovat novou položku"
         android:titleCondensed="defineItem" />
 
-    <item
-        android:id="@+id/removeItem"
-        android:title="Smazat položku se skladu"
-        android:titleCondensed="removeItem" />
 
     <item
         android:id="@+id/showAllItems"
@@ -20,5 +16,15 @@
         android:id="@+id/showBorrowedItems"
         android:title="Zobrazit vypůjčené položky"
         android:titleCondensed="showBorrowedItems" />
+
+    <item
+        android:id="@+id/removeItem"
+        android:title="Smazat položku se skladu"
+        android:titleCondensed="removeItem" />
+
+    <item
+        android:id="@+id/editItem"
+        android:title="Upravit položku"
+        android:titleCondensed="editItem" />
 
 </menu>

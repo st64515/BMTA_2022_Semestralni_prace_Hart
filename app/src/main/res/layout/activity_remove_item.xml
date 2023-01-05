@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Odebrání položky:"
+        android:text="@string/remove_item_headline"
         android:textAlignment="center"
         android:textColor="@color/light_gray_text"
         android:textSize="16sp" />
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:text="Kód:"
+                    android:text="@string/label_code"
                     android:textAlignment="textEnd"
                     android:textColor="@color/light_gray_text" />
 
@@ -56,7 +56,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_weight="3"
                     android:autofillHints=""
-                    android:hint="Zadej kód položky"
+                    android:hint="@string/enter_item_code"
                     android:importantForAutofill="no"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
@@ -77,7 +77,7 @@
                     android:layout_marginBottom="40dp"
                     android:background="@color/noColor"
                     android:backgroundTint="@color/blue_darker2"
-                    android:text="Naskenovat kód"
+                    android:text="@string/scan_code"
                     android:textColor="@color/light_gray_text"
                     android:textSize="15sp" />
             </TableRow>
@@ -87,12 +87,12 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textDescritpion"
+                    android:id="@+id/textDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
-                    android:text="Popis:"
+                    android:text="@string/label_description"
                     android:textAlignment="textEnd"
                     android:textColor="@color/light_gray_text" />
 
@@ -101,7 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:hint="Popis vybrané položky"
+                    android:hint="@string/selected_item_description"
                     android:maxWidth="100dp"
                     android:maxLines="5"
                     android:minHeight="48dp"
@@ -122,7 +122,7 @@
             android:layout_height="80dp"
             android:background="@color/noColor"
             android:backgroundTint="#7E0731"
-            android:text="Odebrat položku"
+            android:text="@string/remove_item"
             android:textColor="@color/light_gray_text"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"

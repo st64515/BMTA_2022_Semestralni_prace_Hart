@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bmta_2022_semestralni_prace_hart.R
-import model.WarehouseItem
+import com.example.bmta_2022_semestralni_prace_hart.model.WarehouseItem
 
 class ItemHolder(view: View) : RecyclerView.ViewHolder(view) {
     private var itemDescription: TextView?

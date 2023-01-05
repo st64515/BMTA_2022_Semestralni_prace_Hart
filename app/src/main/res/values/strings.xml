@@ -1,10 +1,32 @@
 <resources>
     <string name="app_name">Everyscan</string>
     <string name="settings">nastavení</string>
-    <string name="nazev_aplikace">Everyscan.</string>
-    <string name="welcome_picture">Úvodní obrázek</string>
     <string name="_return">Vrátit</string>
     <string name="borrow">Vypůjčit</string>
     <string name="scan_now">Skenovat</string>
     <string name="no_items_to_show">Žádné položky k zobrazení.</string>
+    <string name="picture_of_library">Obrázek knihovny</string>
+    <string name="not_found">Nenalezeno…</string>
+    <string name="all_items_headline">Všechny položky:</string>
+    <string name="borrowed_items_headline">Vypůjčené položky:</string>
+    <string name="edit_item_headline">Editace položky:</string>
+    <string name="label_code">Kód:</string>
+    <string name="enter_item_code">Zadej kód položky</string>
+    <string name="scan_code">Naskenovat kód</string>
+    <string name="label_description">Popis:</string>
+    <string name="selected_item_description">Popis vybrané položky</string>
+    <string name="label_borrowings">Výpůjčky:</string>
+    <string name="actual_number_of_borrowings">Aktuální počet výpůjček</string>
+    <string name="accept_changes">Potvrdit změny</string>
+    <string name="create_new_item_headline">Vytvoření nové položky:</string>
+    <string name="enter_item_description">Zadej popis položky</string>
+    <string name="create_item">Vytvořit položku</string>
+    <string name="remove_item_headline">Odebrání položky:</string>
+    <string name="remove_item">Odebrat položku</string>
+    <string name="last_record">Poslední záznam:</string>
+    <string name="to_define_new_item">Definovat novou položku</string>
+    <string name="to_show_all_items">Zobrazit všechny položky</string>
+    <string name="to_show_borrowed_items">Zobrazit vypůjčené položky</string>
+    <string name="to_remove_item">Smazat položku</string>
+    <string name="to_edit_item">Upravit položku</string>
 </resources>

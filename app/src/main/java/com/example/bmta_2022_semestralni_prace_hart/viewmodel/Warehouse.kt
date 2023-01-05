@@ -1,9 +1,9 @@
-package viewmodel
+package com.example.bmta_2022_semestralni_prace_hart.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import model.WarehouseItem
-import model.WarehouseItemNotFoundException
+import com.example.bmta_2022_semestralni_prace_hart.model.WarehouseItem
+import com.example.bmta_2022_semestralni_prace_hart.model.WarehouseItemNotFoundException
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter
 
 class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     var allItems = mutableMapOf<String, WarehouseItem>()
-    var borrowedItems = mutableMapOf<String, WarehouseItem>()
+    private var borrowedItems = mutableMapOf<String, WarehouseItem>()
 
     fun defineNewWarehouseItem(wItem: WarehouseItem) {
         if (allItems.containsKey(wItem.id)) {
@@ -56,7 +56,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     }
 
     fun returnWarehouseItem(wItemID: String) {
-        var wItem = borrowedItems[wItemID]
+        val wItem = borrowedItems[wItemID]
         if (wItem is WarehouseItem) {
             wItem.lastSeen = DateTimeFormatter
                 .ofPattern("dd. MM. yyyy HH:mm")
@@ -71,7 +71,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     fun removeWarehouseItem(wItemID: String): WarehouseItem? {
         val wItem = allItems[wItemID]
         if (wItem is WarehouseItem) {
-            var removed = allItems.remove(wItemID)
+            val removed = allItems.remove(wItemID)
             if (borrowedItems.containsKey(wItemID)) {
                 borrowedItems.remove(wItemID)
             }
@@ -82,7 +82,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     }
 
     fun allItemsList(): ArrayList<WarehouseItem> {
-        var list = ArrayList<WarehouseItem>()
+        val list = ArrayList<WarehouseItem>()
         for (item in allItems) {
             list.add(item.value)
         }
@@ -90,7 +90,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     }
 
     fun borrowedItemsList(): ArrayList<WarehouseItem> {
-        var list = ArrayList<WarehouseItem>()
+        val list = ArrayList<WarehouseItem>()
         for (item in borrowedItems) {
             list.add(item.value)
         }
@@ -98,19 +98,19 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     }
 
     init {
-        var allItemsArray = parseJsonArray(savedItemsJson, "allItems")
-        var borrowedCodesArray = parseJsonArray(savedItemsJson, "borrowedCodes")
+        val allItemsArray = parseJsonArray(savedItemsJson, "allItems")
+        val borrowedCodesArray = parseJsonArray(savedItemsJson, "borrowedCodes")
         loadAllItems(allItemsArray)
         loadBorrowedItems(borrowedCodesArray)
     }
 
-    fun parseJsonArray(settingsJson: String, item: String): JSONArray? {
-        try {
+    private fun parseJsonArray(settingsJson: String, item: String): JSONArray? {
+        return try {
             val jObj = JSONObject(settingsJson)
-            return jObj.getJSONArray(item)
+            jObj.getJSONArray(item)
         } catch (ex: JSONException) {
             Log.i("JsonParser array", "unexpected JSON exception", ex)
-            return null
+            null
         }
     }
 
@@ -135,7 +135,6 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     }
 
     private fun loadBorrowedItems(borrowedCodes: JSONArray?) {
-        var warehouseItem: WarehouseItem
         borrowedCodes?.let {
             for (i in 0 until borrowedCodes.length()) {
                 try {
@@ -148,7 +147,7 @@ class Warehouse(savedItemsJson: String) : ViewModel(), Serializable {
     }
 
     fun borrowedCodesList(): ArrayList<String> {
-        var codes = ArrayList<String>()
+        val codes = ArrayList<String>()
         for (item in borrowedItems) {
             codes.add(item.key)
         }

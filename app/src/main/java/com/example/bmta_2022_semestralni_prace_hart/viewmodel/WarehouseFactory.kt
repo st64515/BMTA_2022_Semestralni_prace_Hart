@@ -2,7 +2,6 @@ package com.example.bmta_2022_semestralni_prace_hart.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import viewmodel.Warehouse
 
 class WarehouseFactory(private val savedItemsJson: String) : ViewModelProvider.Factory {
 

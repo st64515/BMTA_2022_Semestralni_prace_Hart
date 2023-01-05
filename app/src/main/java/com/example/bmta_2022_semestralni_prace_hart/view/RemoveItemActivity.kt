@@ -12,8 +12,8 @@ import com.example.bmta_2022_semestralni_prace_hart.databinding.ActivityRemoveIt
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
-import model.WarehouseItemNotFoundException
-import viewmodel.Warehouse
+import com.example.bmta_2022_semestralni_prace_hart.model.WarehouseItemNotFoundException
+import com.example.bmta_2022_semestralni_prace_hart.viewmodel.Warehouse
 
 
 class RemoveItemActivity : AppCompatActivity() {
@@ -35,7 +35,7 @@ class RemoveItemActivity : AppCompatActivity() {
                 binding.textItemDescription.text =
                     warehouse.findWarehouseItem(result.contents).description
                 }
-                catch (ex :WarehouseItemNotFoundException)
+                catch (ex : WarehouseItemNotFoundException)
                 {
                     Toast.makeText(this@RemoveItemActivity, "Načtený kód není definován", Toast.LENGTH_LONG)
                         .show()
@@ -52,7 +52,7 @@ class RemoveItemActivity : AppCompatActivity() {
         binding = ActivityRemoveItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         this.window.statusBarColor =
             this.resources.getColor(R.color.blue_darker2, null)
 
@@ -67,15 +67,15 @@ class RemoveItemActivity : AppCompatActivity() {
             ) {
                 try {
                 binding.textItemDescription.text = warehouse.findWarehouseItem(binding.editTextItemCode.text.toString()).description
-                }catch (ex:WarehouseItemNotFoundException)
+                }catch (ex: WarehouseItemNotFoundException)
                 {
-                    binding.textItemDescription.text = "Nenalezeno..."
+                    binding.textItemDescription.text = resources.getString(R.string.not_found)
                 }
             }
         })
 
 
-        binding.buttonDelete.setOnClickListener() {
+        binding.buttonDelete.setOnClickListener {
             if (binding.editTextItemCode.text.isEmpty()) {
                 Toast.makeText(this, "Zadejte kód položky.", Toast.LENGTH_LONG).show()
             } else {
@@ -85,7 +85,7 @@ class RemoveItemActivity : AppCompatActivity() {
             }
         }
 
-        binding.buttonScanCode.setOnClickListener() {
+        binding.buttonScanCode.setOnClickListener {
             val options = ScanOptions()
             options.setPrompt("Stiskni tlačítko volume nahoru pro rozsvícení baterky")
             options.setBeepEnabled(false)

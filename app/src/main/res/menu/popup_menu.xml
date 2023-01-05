@@ -3,28 +3,28 @@
 
     <item
         android:id="@+id/defineItem"
-        android:title="Definovat novou položku"
+        android:title="@string/to_define_new_item"
         android:titleCondensed="defineItem" />
 
 
     <item
         android:id="@+id/showAllItems"
-        android:title="Zobrazit všechny položky"
+        android:title="@string/to_show_all_items"
         android:titleCondensed="showAllItems" />
 
     <item
         android:id="@+id/showBorrowedItems"
-        android:title="Zobrazit vypůjčené položky"
+        android:title="@string/to_show_borrowed_items"
         android:titleCondensed="showBorrowedItems" />
 
     <item
         android:id="@+id/removeItem"
-        android:title="Smazat položku se skladu"
+        android:title="@string/to_remove_item"
         android:titleCondensed="removeItem" />
 
     <item
         android:id="@+id/editItem"
-        android:title="Upravit položku"
+        android:title="@string/to_edit_item"
         android:titleCondensed="editItem" />
 
 </menu>

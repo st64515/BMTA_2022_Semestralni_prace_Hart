@@ -10,7 +10,7 @@ import com.example.bmta_2022_semestralni_prace_hart.databinding.ActivityNewItemB
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
-import model.WarehouseItem
+import com.example.bmta_2022_semestralni_prace_hart.model.WarehouseItem
 
 class NewItemActivity : AppCompatActivity() {
 
@@ -34,11 +34,11 @@ class NewItemActivity : AppCompatActivity() {
         binding = ActivityNewItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
         this.window.statusBarColor =
             this.resources.getColor(R.color.blue_darker2, null)
 
-        binding.buttonAdd.setOnClickListener() {
+        binding.buttonAdd.setOnClickListener {
             if (binding.editTextItemCode.text.isEmpty()) {
                 Toast.makeText(this, "Zadejte kód položky.", Toast.LENGTH_LONG).show()
             } else if (binding.editTextItemDescription.text.isEmpty()) {
@@ -55,7 +55,7 @@ class NewItemActivity : AppCompatActivity() {
             }
         }
 
-        binding.buttonScanCode.setOnClickListener() {
+        binding.buttonScanCode.setOnClickListener {
             val options = ScanOptions()
             options.setPrompt("Stiskni tlačítko volume nahoru pro rozsvícení baterky")
             options.setBeepEnabled(false)

@@ -1,4 +1,4 @@
-package model
+package com.example.bmta_2022_semestralni_prace_hart.model
 
 import java.io.Serializable
 import java.time.Instant
@@ -13,6 +13,3 @@ data class WarehouseItem(
         .ofPattern("dd. MM. yyyy HH:mm")
         .withZone(ZoneOffset.ofHours(1))
         .format(Instant.now())) : Serializable
-{
-
-}

@@ -12,9 +12,8 @@ Aplikace slouží ke správě výpůjček čehokoli, co lze opatřit čárovým 
 S využitím knihovny ZXing pro načítání QR nebo čárového kódu aplikace tyto kódy načítá a spravuje.
 Při práci s uloženými položkami je splněn požadavek CRUD, položky tedy lze upravovat, mazat, zobrazovat a vytvářet.
 
-
 ### Screenshoty:
-![welcome screen](./pictures/screenshot1.png)
-![menu](./pictures/screenshot2.png)
-![all items list](./pictures/screenshot3.png)
-![scanner view](./pictures/screenshot4.png)
+![welcome screen](./pictures/screenshot1.jpg)
+![menu](./pictures/screenshot2.jpg)
+![all items list](./pictures/screenshot3.jpg)
+![scanner view](./pictures/screenshot4.jpg)

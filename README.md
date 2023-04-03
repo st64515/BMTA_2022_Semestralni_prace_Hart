@@ -11,6 +11,7 @@
 Aplikace slouží ke správě výpůjček čehokoli, co lze opatřit čárovým nebo QR kódem. Například knihy s ISBN nebo DVD.
 S využitím knihovny ZXing pro načítání QR nebo čárového kódu aplikace tyto kódy načítá a spravuje.
 Při práci s uloženými položkami je splněn požadavek CRUD, položky tedy lze upravovat, mazat, zobrazovat a vytvářet.
+
 Aplikace:
 - kontroluje korektnost uživatelských vstupů
 - dodržuje architekturu MVVM

@@ -19,6 +19,9 @@ Aplikace:
 - ukládá data lokálně do JSON souboru
 - je uživatelsky přívětivá
 
+### IDE
+Android Studio Dolphin | 2021.3.1 Patch 1
+
 ### Screenshoty:
 ![welcome screen](./pictures/screenshot1.jpg)
 ![menu](./pictures/screenshot2.jpg)
